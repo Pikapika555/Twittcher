@@ -1,0 +1,50 @@
+extends layout
+
+block content	
+	div.container
+		div.row
+			div.span8
+				h1 Twittcher
+			div.span4
+				form.form-inline(method="post", id="loginForm")
+					input.input-small(id="username", type="text", name="User", placeholder="Username")
+					b 
+					input.input-small(id="password", type="password", name="Password", placeholder="Password")
+					b 
+					a.btn.btn-primary(type="submit") 
+						i.icon-home.icon-white
+						b  Sign in
+		hr
+			
+		div.row
+			div.span3
+				img.img-polaroid(src="http://placehold.it/200x250")
+				hr
+				table.table.table-striped
+					tbody	
+						tr
+							td Nickname:
+							td Pika
+						tr
+							td Sex:
+							td Male
+						tr
+							td Age
+							td 23
+			div.span9
+					ul.nav-tabs.nav
+						li.active
+							a(href="$Wall") Wall
+						li
+							a(href="#") Search
+
+					div.wPost
+						img.img-polaroid.wIMargin(src="http://placehold.it/100x125")
+						textarea(rows="4")
+						a.btn.btn-primary.XBTN(type="button")
+							h1 Post
+					div.wPost
+						img.img-polaroid.wIMargin(src="http://placehold.it/100x125")
+						
+		div.row
+			div.span12.red Footer
