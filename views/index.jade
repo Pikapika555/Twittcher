@@ -6,14 +6,15 @@ block content
 			div.span8
 				h1 Twittcher
 			div.span4
-				form.form-inline(method="post", id="loginForm")
-					input.input-small(id="username", type="text", name="User", placeholder="Username")
+				form.form-inline(method="post")
+					input.input-small(type="text", name="username", placeholder="Username")
 					b 
-					input.input-small(id="password", type="password", name="Password", placeholder="Password")
+					input.input-small(type="password", name="password", placeholder="Password")
 					b 
-					a.btn.btn-primary(type="submit") 
+					button.btn.btn-primary(type="submit")
 						i.icon-home.icon-white
 						b  Sign in
+
 		hr
 			
 		div.row
@@ -34,14 +35,14 @@ block content
 			div.span9
 					ul.nav-tabs.nav
 						li.active
-							a(href="$Wall") Wall
+							a(href="/wall") Wall
 						li
-							a(href="#") Search
+							a(href="/search") Search
 
 					div.wPost
 						img.img-polaroid.wIMargin(src="http://placehold.it/100x125")
-						textarea(rows="4")
-						a.btn.btn-primary.XBTN(type="button")
+						textarea(rows="4", name="postbox")
+						a.btn.btn-primary.XBTN(type="button", name="Bpost")
 							h1 Post
 					div.wPost
 						img.img-polaroid.wIMargin(src="http://placehold.it/100x125")
