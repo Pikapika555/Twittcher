@@ -1,11 +1,10 @@
 extends layout
-
 block content	
 	div.container
 		div.row
-			div.span8
-				h1 Twittcher
-			div.span4
+			#twitt.span8
+				img.img-polaroid(src="http://placehold.it/200x100")
+			#Login.span4
 				form.form-inline(method="post")
 					input.input-small(type="text", name="username", placeholder="Username")
 					b 
@@ -14,7 +13,13 @@ block content
 					button.btn.btn-primary(type="submit")
 						i.icon-home.icon-white
 						b  Sign in
-
+				loggedvariable = 0
+				case loggedvariable
+					when 1
+						p you have no friends
+					when 0
+						p youre not logged
+					
 		hr
 			
 		div.row
@@ -33,19 +38,21 @@ block content
 							td Age
 							td 23
 			div.span9
-					ul.nav-tabs.nav
-						li.active
-							a(href="/wall") Wall
-						li
-							a(href="/search") Search
-
-					div.wPost
-						img.img-polaroid.wIMargin(src="http://placehold.it/100x125")
-						textarea(rows="4", name="postbox")
-						a.btn.btn-primary.XBTN(type="button", name="Bpost")
-							h1 Post
-					div.wPost
-						img.img-polaroid.wIMargin(src="http://placehold.it/100x125")
+				ul.nav-tabs.nav(id="myTab")
+					li.active
+						a(href="/wall") Wall
+					li
+						a(href="/search") Search
+					li
+						a(href="/profiles") Profiles				
+				
+				div
+					extends layout
+					block wall
 						
 		div.row
-			div.span12.red Footer
+			div.span12.red
+				div Copyright © Twittcher #{+new Date().getFullYear()} 
+				a(href='/page?name=about') About 
+				| |  
+				a(href='/page?name=contact') Contact Us

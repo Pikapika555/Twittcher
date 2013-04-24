@@ -1,6 +1,6 @@
 textarea{
-resize: none;
-width: 500px;
+	resize: none;
+	width: 500px;
 }
 
 .wPost{
@@ -8,7 +8,7 @@ width: 500px;
 	height: auto;
 	width: 96%;
 	margin: 2%;
-	border-radius: 5px;
+	border-radius: 3px;
 	
 	background-color: #eee;
 }

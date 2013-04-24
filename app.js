@@ -19,6 +19,8 @@ app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.bodyParser());
 app.use(express.methodOverride());
+  app.use(express.cookieParser('your secret here'));
+  app.use(express.session());
 app.use(app.router);
   app.use(require('stylus').middleware(__dirname + '/public'));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -31,13 +33,10 @@ if ('development' == app.get('env')) {
 app.get('/', routes.index);
 app.get('/users', user.list);
 
-
 //own route plan
 ////get
-app.get('/profil', routes.bla);
-//app.get('/profil/*', routes.bla);
-app.get('/profil/*/wall', routes.bla);
-app.get('/profil/*/search', routes.bla);
+app.get('/wall', routes.wall);
+app.get('/search', routes.search);
 
 ////post
 app.post('/', routes.home_post_handler);
