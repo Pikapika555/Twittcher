@@ -1,0 +1,28 @@
+extends topbar
+block content
+		div.row
+			div.span3
+				img.img-polaroid(src="http://placehold.it/200x250")
+				hr
+				table.table.table-striped
+					tbody	
+						tr
+							td Nickname:
+							td Pika
+						tr
+							td Sex:
+							td Male
+						tr
+							td Age
+							td 23
+			div.span9
+				ul.nav-tabs.nav(id="myTab")
+					li.active
+						a(href="/wall") Wall
+					li
+						a(href="./search") Search
+					li
+						a(href="username/profiles") Profiles				
+				
+				div
+					block wall

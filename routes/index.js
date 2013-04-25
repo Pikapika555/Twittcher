@@ -6,6 +6,14 @@ exports.index = function(req, res){
 res.render('index', { title: 'Express' });
 };
 
+exports.profil = function(req, res){
+
+res.render('profil', { title: 'Express' });
+
+//res.get(profilname)
+};
+
+
 exports.wall = function(req, res){
 res.render('Tabs/wall', { title: 'wall' });
 };
@@ -14,6 +22,12 @@ exports.search = function(req, res){
 res.render('Tabs/search', { title: 'search' });
 //url.resolve('http://example.com/', '/one')
 };
+
+exports.profiles = function(req, res){
+res.render('Tabs/profiles', { title: 'profiles' });
+
+};
+
 
 
 
@@ -35,5 +49,5 @@ exports.home_post_handler = function(req, res) {
 	//req.session.password = password;
 	//console.log(username+"  "+password);
     // redirect the user to homepage
-    res.redirect('/');
+    res.redirect('/profil/'+username);
 };

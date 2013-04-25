@@ -1,0 +1,32 @@
+extends layout
+block header
+	div.container
+		div.row
+			#twitt.span8
+				img.img-polaroid(src="http://placehold.it/200x100")
+			#Login.span4
+				form.form-inline(method="post")
+					input.input-small(type="text", name="username", placeholder="Username")
+					b 
+					input.input-small(type="password", name="password", placeholder="Password")
+					b 
+					button.btn.btn-primary(type="submit")
+						i.icon-home.icon-white
+						b  Sign in
+				loggedvariable = 0
+				case loggedvariable
+					when 1
+						p you have no friends
+					when 0
+						p youre not logged
+					
+		hr
+		div
+			block content
+			
+		div.row
+			div.span12.red
+				div Copyright © Twittcher #{+new Date().getFullYear()} 
+				a(href='/page?name=about') About 
+				| |  
+				a(href='/page?name=contact') Contact Us

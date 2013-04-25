@@ -35,8 +35,10 @@ app.get('/users', user.list);
 
 //own route plan
 ////get
-app.get('/wall', routes.wall);
-app.get('/search', routes.search);
+app.get('/profil/:profilId', routes.profil);
+app.get('/profil/*/wall', routes.wall);
+app.get('/profil/:profilId/search', routes.search);
+app.get('/profil/:profilId/profiles', routes.profiles);
 
 ////post
 app.post('/', routes.home_post_handler);
