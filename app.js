@@ -36,7 +36,7 @@ app.get('/users', user.list);
 //own route plan
 ////get
 app.get('/profil/:profilId', routes.profil);
-app.get('/profil/*/wall', routes.wall);
+app.get('/profil/:profilId/wall', routes.wall);
 app.get('/profil/:profilId/search', routes.search);
 app.get('/profil/:profilId/profiles', routes.profiles);
 

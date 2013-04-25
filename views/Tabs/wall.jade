@@ -1,9 +1,16 @@
-extends ../index
+extends ../profil
 block wall
 					div.wPost
-						img.img-polaroid.wIMargin(src="http://placehold.it/100x125")
-						textarea(rows="4", name="postbox")
-						button.btn.btn-primary.XBTN(type="button", onclick="loginChecker()")
-							h1 Post
+						div.row
+							div.span1
+									img.img-polaroid(src="http://placehold.it/100x125")
+							div.span6
+								div.left
+									textarea.span6(rows="4", name="postbox")
+						div.row
+							div.span1
+							div.span6
+								button.span6.btn.btn-primary.btnX(type="submit")
+									b Post it !
 					div.wPost
 						img.img-polaroid.wIMargin(src="http://placehold.it/100x125")
