@@ -8,19 +8,16 @@ block header
 								img.img-polaroid(src="http://placehold.it/200x100")
 							div.loginBar.span4
 								loggedvariable = 0
-								case loggedvariable
-									when 1
-										p you have no friends
-									when 0
-										p youre not logged
-							form.form-inline(method="post")
-									input.input-small(type="text", name="username", placeholder="Username")
-									b 
-									input.input-small(type="password", name="password", placeholder="Password")
-									b 
-									button.btn.btn-primary.dropdown-toggle(type="submit")
-										i.icon-home.icon-white
-										b  Sign in
+							#loginForm
+								form.form-inline(method="post")
+										input.input-small(id="logName", type="text", name="username", placeholder="Username")
+										| 
+										input.input-small(id="logPass", type="password", name="password", placeholder="Password")
+										|  
+										button.btn.btn-primary(type="button", onclick="ajxLog()")
+											i.icon-home.icon-white
+											b  Sign in
+											
 								
 		div.bla		
 			div.container
