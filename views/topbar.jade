@@ -4,19 +4,25 @@ block header
 			div.navbar-inner
 				div.container
 					div.row
-							#twitt.span8
+							#twitt.span7
 								img.img-polaroid(src="http://placehold.it/200x100")
 							div.loginBar.span4
 								loggedvariable = 0
-							#loginForm
-								form.form-inline(method="post")
-										input.input-small(id="logName", type="text", name="username", placeholder="Username")
-										| 
-										input.input-small(id="logPass", type="password", name="password", placeholder="Password")
-										|  
-										button.btn.btn-primary(type="button", onclick="ajxLog()")
-											i.icon-home.icon-white
-											b  Sign in
+							- if(!username)
+								#loginForm
+										form.form-inline(method="post")
+												input.input-small(id="logName", type="text", name="username", placeholder="Username")
+												| 
+												input.input-small(id="logPass", type="password", name="password", placeholder="Password")
+												|												
+												button.btn.btn-primary(type="post", data-loading-text="Logging in...")
+													i.icon-home.icon-white
+													b  Sign in
+											- if(logError)
+												span.red Wrong Password or Username									
+							- else
+								p Hello #{username}
+
 											
 								
 		div.bla		

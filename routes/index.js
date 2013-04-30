@@ -2,15 +2,15 @@
 * GET home page.
 */
 
+
 exports.index = function(req, res){
-res.render('index', { title: 'Express' });
+//res.render('index', { title: 'Express', loggedIn: 0, username: "penis"});
+Render(req, res, "index");
 };
 
 exports.profil = function(req, res){
 
-res.send(req.body.username);
-res.render('profil', { title: 'Express', penis: 1 });
-
+res.render('profil', { title: 'Express', layout: !req.xhr, username: "bla" });
 //res.get(profilname)
 };
 
@@ -38,25 +38,40 @@ exports.home_post_handler = function(req, res, data) {
 	var username = req.body.username;
 	var password = req.body.password;
     
-	var data = new Array();
-		data[0] = 0;
-		data[1] = username;
 	if(loginCheck(username, password)){
 		// store the username as a session variable
 		req.session.username = username;
 		req.session.password = password;
 		console.log("Logged: "+req.body.username);
-		data[0] = 1;
-	}		
-	res.send(data);
+		res.redirect('/profil/'+username);
+	}
+	else{
+		res.render('index', {
+			title: 'Twittcher',
+			logError: 1,
+			username: req.session.username
+			})
+	}
 	
 
-
     // redirect the user to homepage
-    //res.redirect('/profil/'+username);
+    
 };
 
 function loginCheck(name, pass){
 	if(name == "pika" && pass == "bla"){return true;}
 	else{ return false };
+}
+
+function Render(req, res, sUrl){
+	res.render(sUrl, {
+		title: "Twittcher",
+		username: req.session.username,
+		logError: 0
+	
+	});
+}
+
+function Safety(req,res){
+	if(!req.session.username){res.redirect("/");}
 }

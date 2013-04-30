@@ -7,7 +7,33 @@ block content
 			h1.titW This is Twittcher !
 			br
 			p.titW Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-			a.btn.btn-primary.btn-large(type="button", href="/registration")
-										i.icon-home.icon-white
-										b  Register
-			
+			a.btn.btn-primary.btn-large(role="button", href="#myModal", data-toggle="modal")
+				i.icon-home.icon-white
+				b  Register
+
+			#myModal.modal.hide.fade(tabindex="-1", role="dialog", aria-labelledby="myModalLabel", aria-hidden="true")
+				div.modal-header
+					button.close(type="button", data-dismiss="modal", aria-hidden="true")
+					h3(id="myModalLabel") Registration
+				div.modal-body
+					form.form-horizontal(method="post")
+						div.control-group
+							label.control-label(for="inputPassword") Email:
+							input.input-small(id="logPass", type="text", name="password", placeholder="Email")
+						div.control-group
+							label.control-label(for="inputPassword") Username:
+							input.input-small(id="logName", type="text", name="username", placeholder="Username")
+						div.control-group
+							label.control-label(for="inputPassword") Password:
+							input.input-small(id="logPass", type="password", name="password", placeholder="Password")
+						div.control-group
+							label.control-label(for="inputPassword") Repeat Password:
+							input.input-small(id="logPass", type="password", name="password", placeholder="Repeat Password")
+						div.control-group
+							label.control-label(for="") Upload Image
+							form(action="...", method="post", enctype="multipart/form-data")
+							input(type="file", name="displayImage")
+
+				div.modal-footer
+					button.btn(data-dismiss="modal", aria-hidden="true") Close
+					button.btn.btn-primary Registrate
