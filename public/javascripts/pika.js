@@ -74,6 +74,7 @@ function ajxLogHelp(data){
 //ProfilHelper
 function ajxWallHelper(data){
 	document.location.hash = "Wall";
+	CreatePost("blaaaaaaaaaaa");
 	
 }
 
@@ -84,7 +85,7 @@ function ajxWallHelper(data){
 function ajxGetter(){
 	base = "http://127.0.0.1:3000";
 	switch(window.location){
-		case base+"/"
+		//case base+"/"
 	}
 }
 
@@ -97,6 +98,26 @@ function ajxLogGet(){
 function CreatePost(data){
 	var newPost = document.createElement("div");
 		newPost.className = "wPost";
-		newPost.innerHTML = data;
-	var upperDiv = document.getElementById("");
+	var upperDiv = document.getElementById("Content");
+		
+	
+	var newRow = document.createElement("div");
+		newRow.className = "row";
+		
+	
+	var newSpan1 = document.createElement("div");
+		newSpan1.className = "span1";
+	var newSpan2 = document.createElement("div");
+		newSpan2.className = "span6";
+		newSpan2.innerHTML = data;
+	var newImg = document.createElement("img");
+		newImg.className = "img-polaroid";
+		newImg.setAttribute("src", "http://placehold.it/100x125");
+	
+		upperDiv.appendChild(newPost);
+		newPost.appendChild(newRow);
+		newRow.appendChild(newSpan1);
+		newRow.appendChild(newSpan2);
+		newSpan1.appendChild(newImg);
+		
 }
