@@ -10,22 +10,22 @@ Render(req, res, "index");
 
 exports.profil = function(req, res){
 
-res.render('profil', { title: 'Express', layout: !req.xhr, username: "bla" });
+res.render('profil', { title: 'Express', username: req.session.username });
 //res.get(profilname)
 };
 
 
 exports.wall = function(req, res){
-res.render('Tabs/wall', { title: 'wall', loggedvariable: 1 });
+res.render('Tabs/wall', { title: 'wall', username: req.session.username });
 };
 
 exports.search = function(req, res){
-res.render('Tabs/search', { title: 'search' });
+res.render('Tabs/search', { title: 'search', username: req.session.username });
 //url.resolve('http://example.com/', '/one')
 };
 
 exports.profiles = function(req, res){
-res.render('Tabs/profiles', { title: 'profiles' });
+res.render('Tabs/profiles', { title: 'profiles', username: req.session.username });
 };
 
 
@@ -43,7 +43,7 @@ exports.home_post_handler = function(req, res, data) {
 		req.session.username = username;
 		req.session.password = password;
 		console.log("Logged: "+req.body.username);
-		res.redirect('/profil/'+username);
+		res.redirect('/profil/'+req.session.username);
 	}
 	else{
 		res.render('index', {

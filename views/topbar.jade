@@ -5,7 +5,8 @@ block header
 				div.container
 					div.row
 							#twitt.span7
-								img.img-polaroid(src="http://placehold.it/200x100")
+								a(href="/")
+									img(src="/images/Twittcher.jpg")
 							div.loginBar.span4
 								loggedvariable = 0
 							- if(!username)
@@ -22,6 +23,9 @@ block header
 												span.red Wrong Password or Username									
 							- else
 								p Hello #{username}
+								a.btn.btn-primary(href="/profil/#{username}")
+									i.icon-home.icon-white
+									b  Profil
 
 											
 								
