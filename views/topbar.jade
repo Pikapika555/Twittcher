@@ -7,7 +7,7 @@ block header
 							#twitt.span7
 								a(href="/")
 									img(src="/images/Twittcher.jpg")
-							div.loginBar.span4
+							div.loginBar.span1
 								loggedvariable = 0
 							- if(!username)
 								#loginForm
@@ -19,13 +19,16 @@ block header
 												button.btn.btn-primary(type="post", data-loading-text="Logging in...")
 													i.icon-home.icon-white
 													b  Sign in
-											- if(logError)
-												span.red Wrong Password or Username									
+											- if(logError != 0)
+												span.red #{logError}
 							- else
-								p Hello #{username}
-								a.btn.btn-primary(href="/profil/#{username}")
-									i.icon-home.icon-white
-									b  Profil
+								form.form-horizontal(method="post")
+									p Hello #{username}
+									a.btn.btn-primary(href="/profil/#{username}")
+										i.icon-home.icon-white
+										b  Profil
+									a.btn.btn-primary(href="/logout")
+										b Logout
 
 											
 								

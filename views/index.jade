@@ -16,24 +16,37 @@ block content
 					button.close(type="button", data-dismiss="modal", aria-hidden="true")
 					h3(id="myModalLabel") Registration
 				div.modal-body
-					form.form-horizontal(method="post")
+					form.form-horizontal(method="post", enctype="multipart/form-data", action="regIT")
 						div.control-group
 							label.control-label(for="inputPassword") Email:
-							input.input-small(id="logPass", type="text", name="password", placeholder="Email")
+							input.input-small(id="logPass", type="text", name="R_email", placeholder="Email")
 						div.control-group
 							label.control-label(for="inputPassword") Username:
-							input.input-small(id="logName", type="text", name="username", placeholder="Username")
+							input.input-small(id="logName", type="text", name="R_username", placeholder="Username")
 						div.control-group
 							label.control-label(for="inputPassword") Password:
-							input.input-small(id="logPass", type="password", name="password", placeholder="Password")
+							input.input-small(id="logPass", type="password", name="R_password", placeholder="Password")
 						div.control-group
 							label.control-label(for="inputPassword") Repeat Password:
-							input.input-small(id="logPass", type="password", name="password", placeholder="Repeat Password")
+							input.input-small(id="logPass", type="password", name="R_password2", placeholder="Password")
 						div.control-group
 							label.control-label(for="") Upload Image
-							form(action="...", method="post", enctype="multipart/form-data")
-							input(type="file", name="displayImage")
+							input(type="file", name="R_picture")
+						div.control-group
+							button.btn.btn-primary(type="post")
+								b Registrate
+						- if(regError != 0)
+							div.control-group
+								span.red #{regError}
+						
+						
 
 				div.modal-footer
 					button.btn(data-dismiss="modal", aria-hidden="true") Close
-					button.btn.btn-primary Registrate
+
+					
+script
+	if(regError != 0){
+		$('#myModal').modal('show');
+		console.log("bla");
+	}

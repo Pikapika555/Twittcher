@@ -2,13 +2,19 @@ extends topbar
 block content
 		div.row
 			div.span3
-				img.img-polaroid(src="http://placehold.it/200x250")
+				- if(item.picture)
+					img.img-polaroid(src="/pictures/#{item.picture}", height="250", width="200")
+				- else
+					img.img-polaroid(src="http://placehold.it/200x250")
 				hr
 				table.table.table-striped
 					tbody	
 						tr
 							td Nickname:
-							td Pika
+							td #{item.name}
+						tr
+							td Email:
+							td #{item.email}
 						tr
 							td Sex:
 							td Male

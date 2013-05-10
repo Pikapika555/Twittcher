@@ -1,12 +1,12 @@
 extends ../profil
 block wall
-					div.wPost
-						img.img-polaroid.wIMargin(src="http://placehold.it/100x125")
-						textarea(rows="4", name="postbox")
-						button.btn.btn-primary.XBTN(type="button", onclick="loginChecker()")
-							h1 Post
-		script
-			$("#myTab a[href='/search']").addClass("active");
-			//(href="/wall")
+	div.row
+		ul.thumbnails
 			
-			in funktion schreiben // body onload
+					
+				- for(var i = 0; i < profiles.length; i++)
+					li.span2
+						div.thumbnail
+							a(href="/profil/#{profiles[i].name}")
+								img(src="/pictures/#{profiles[i].picture}")
+								h4 #{profiles[i].name}
