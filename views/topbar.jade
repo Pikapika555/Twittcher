@@ -22,12 +22,12 @@ block header
 											- if(logError != 0)
 												span.red #{logError}
 							- else
-								form.form-horizontal(method="post")
+								form.form-horizontal(method="post", action="logout")
 									p Hello #{username}
 									a.btn.btn-primary(href="/profil/#{username}")
 										i.icon-home.icon-white
 										b  Profil
-									a.btn.btn-primary(href="/logout")
+									button.btn.btn-primary(type="submit")
 										b Logout
 
 											

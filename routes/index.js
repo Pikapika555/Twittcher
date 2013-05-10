@@ -139,7 +139,7 @@ exports.Delete = function(req, res){
 }
 
 exports.logout = function(req, res){
-	session.destroy();
+	req.session.destroy();
 	res.redirect('/');
 }
 
