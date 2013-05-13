@@ -48,6 +48,7 @@ app.post('/', routes.home_post_handler);
 app.post('/regIT', routes.Register);
 app.post('/profil/:urlName/postWall', routes.Posting);
 app.post('/profil/:currentProfil/delete/:itemType/:id', routes.Delete);
+app.post('*/searchIt', routes.p_search);
 app.post('*/logout', routes.logout);
 
 

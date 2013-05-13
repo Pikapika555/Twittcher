@@ -1,31 +1,42 @@
 extends ../profil
 block wall
-					div.wPost
-						div.row
-							div.span2
-									img.img-polaroid(src="http://placehold.it/100x125")
-							div.span6
-								form.form-inline(method="post", action="postWall")
-									textarea.span6(rows="4", name="postbox")
-									button.span6.btn.btn-primary.btnX.left(type="submit")
-										b Post it !
-				
+		div.span9
+			ul.nav-tabs.nav(id="myTab")
+				li.active
+					a(href="/profil/#{item.name}/wall") Wall
+				li
+					a(href="/profil/#{item.name}/search") Search
+				li
+					a(href="/profil/#{item.name}/profiles") Profiles	
 					
-					- for(var i = posts.length -1; i > -1; i--)
-						div.wPost
+			div.wPost
+				div.row
+					div.span2
+							img.img-polaroid(src="/pictures/p_#{item.name}.jpg")
+					div.span6
+						form.form-inline(method="post", action="postWall")
+							textarea.span6(rows="4", name="postbox")
+							button.span6.btn.btn-primary.btnX.left(type="submit")
+								b Post it !
+
+			
+			- for(var i = posts.length -1; i > -1; i--)
+				div.wPost
+					div.row
+						div.span2
+							a(href="/profil/#{posts[i].author}")
+								img.img-polaroid.wIMargin(src="/pictures/p_#{posts[i].author}.jpg", width="100")
+						div.span6
 							div.row
-								div.span2
-									img.img-polaroid.wIMargin(src="http://placehold.it/100x125")
-								div.span6
-									div.row
-										form.form-inline(method="post", action="delete/post/#{posts[i]._id}")	
-											div.pull-right
-												button.btn.btn-link(type="submit")
-													i.icon-remove
-											b #{posts[i].author} - #{posts[i].time}
-										hr
-									div.row
-										p #{posts[i].message}
-										
+								form.form-inline(method="post", action="delete/post/#{posts[i]._id}")
+									- if(posts[i].author == username || posts[i].reciepient == username)
+										div.pull-right
+											button.btn.btn-link(type="submit")
+												i.icon-remove
+									b #{posts[i].author} - #{posts[i].time}
+								hr
+							div.row
+								p #{posts[i].message}
+								
 										
 								

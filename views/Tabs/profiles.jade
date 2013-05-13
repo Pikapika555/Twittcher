@@ -1,12 +1,20 @@
 extends ../profil
 block wall
-	div.row
-		ul.thumbnails
-			
-					
-				- for(var i = 0; i < profiles.length; i++)
-					li.span2
-						div.thumbnail
-							a(href="/profil/#{profiles[i].name}")
-								img(src="/pictures/#{profiles[i].picture}")
-								h4 #{profiles[i].name}
+	div.span9
+			ul.nav-tabs.nav(id="myTab")
+				li
+					a(href="/profil/#{item.name}/wall") Wall
+				li
+					a(href="/profil/#{item.name}/search") Search
+				li.active
+					a(href="/profil/#{item.name}/profiles") Profiles
+
+
+
+			ul.thumbnails
+					- for(var i = 0; i < profiles.length; i++)
+						li.span2
+							div.thumbnail
+								a(href="/profil/#{profiles[i].name}")
+									img(src="/pictures/p_#{profiles[i].name}.jpg")
+									h4 #{profiles[i].name}

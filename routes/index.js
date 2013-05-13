@@ -45,8 +45,7 @@ exports.wall = function(req, res){
 
 //Render Search
 exports.search = function(req, res){
-res.render('Tabs/search', { title: 'search', username: req.session.username });
-//url.resolve('http://example.com/', '/one')
+	CreateSearch(req, res);
 };
 
 //Render ProfilOverview
@@ -84,7 +83,7 @@ exports.Register = function(req, res, data){
 
 		if(req.files.R_picture.type == "image/jpeg"){
 			var tmp_path = req.files.R_picture.path;
-			var target_path = './public/pictures/' + req.files.R_picture.name;
+			var target_path = './public/pictures/p_' + req.body.R_username + '.jpg'; //   req.files.R_picture.name;
 			fs.rename(tmp_path, target_path, function(err) {
 				if (err) throw err;
 				fs.unlink(tmp_path, function() {
@@ -104,6 +103,7 @@ exports.Register = function(req, res, data){
 		}
 		
 		regIt(res, req, profil);
+		
 };
 
 exports.Posting = function(req, res, data){
@@ -130,11 +130,21 @@ exports.Posting = function(req, res, data){
 	res.redirect('/profil/'+ message.reciepient + '/wall');
 }
 
+exports.p_search = function(req, res){
+	CreateSearch(req, res);
+}
+
 exports.Delete = function(req, res){
-	switch(req.params.itemType){
+	var type = req.params.itemType;
+	switch(type){
 		case "post":
+			console.log("post: "+type)
 			console.log(req.params.id);
-			DeletePost(req, res, req.params.id);
+			DeletePost(req, res);
+		case "profil":
+			console.log("profil: "+type)
+			console.log("deleting Profil: "+req.params.id)
+			DeleteProfil(req, res);
 	}
 }
 
@@ -158,6 +168,10 @@ function regIt(res, req, profil){
 						res.send({'error':'An error has occurred'});
 					} else {
 						console.log('Success');
+						req.session.username = profil.name;
+						req.session.password = profil.pass;
+						res.redirect('/profil/'+req.body.R_username);
+						
 					}
 				});
 			});
@@ -256,13 +270,34 @@ function CreateProfiles(req, res, item, callback){
 	});
 }
 
-function DeletePost(req, res, id){
-	var id = new ObjectID(id);
+function CreateSearch(req, res){ //aufrufbar durch post und get
+	var searVal = req.body.searchit;
+	//console.log(searVal);
+	CreateProfil(req, res, function(req, res, item){
+		if(searVal){
+			console.log(searVal);
+			db.collection("profiles", function(err, collection) {
+				collection.find({"name": searVar}).toArray(function(err, searProf) {
+					if(!searProf){ searProf = 0; }
+					console.log("a");
+					db.collection("postings", function(err, collection) {
+						collection.find().toArray(function(err, searPosts) {
+							if(!searPosts){ searPosts = 0; }
+							RSearch(req, res, item, searProf, searPosts);
+						});
+					});
+						
+				});
+			});
+		}
+		else{ RSearch(req, res, item, 0, 0); console.log("blah"); }
+	});
+}
+
+function DeletePost(req, res){
+	var id = new ObjectID(req.params.id);
 	db.collection('postings', function(err, collection) {
-	
-		collection.find({'_id': id}).toArray( function(err, items) {
-			
-			var item = items[0];
+		collection.findOne({'_id': id}, function(err, item) {
 			if(item.reciepient == req.session.username || item.author == req.session.username){
 				collection.remove({'_id': id}, {safe:true}, function(err, result){
 					if(!err){
@@ -270,6 +305,25 @@ function DeletePost(req, res, id){
 						res.redirect('/profil/'+req.params.currentProfil+'/wall');
 					}
 				}); 
+			}
+		});
+	});
+}
+
+function DeleteProfil(req, res){
+	var id = new ObjectID(req.params.id);
+	db.collection('profiles', function(err, collection) {
+		collection.findOne({'_id': id}, function(err, item) {
+			if(req.session.username == item.name){
+				collection.remove({'_id': id}, {safe:true}, function(err, result){
+					db.collection('postings', function(err, posts) {
+						posts.remove({'author': item.name}, {safe:true}, function(err, result){
+							console.log("profil "+item.name+" removed.");
+							req.session.destroy();
+							res.redirect('/');
+						});
+					});
+				});
 			}
 		});
 	});
@@ -318,6 +372,20 @@ function RProfiles(req, res, item, profiles){
 		regError: 0,
 		item: item,
 		profiles: profiles
+	});
+}
+
+//Render Search Function
+function RSearch(req, res, item, foundProfiles, foundPosts){
+	res.render("Tabs/search", {
+		title: "Twittcher",
+		username: req.session.username,
+		_id: req.session.Pid,
+		logError: 0,
+		regError: 0,
+		item: item,
+		fProf: foundProfiles,
+		fPosts: foundPosts
 	});
 }
 

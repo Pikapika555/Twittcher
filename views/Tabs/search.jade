@@ -1,12 +1,32 @@
 extends ../profil
 block wall
-					div.wPost
-						img.img-polaroid.wIMargin(src="http://placehold.it/100x125")
-						textarea(rows="4", name="postbox")
-						button.btn.btn-primary.XBTN(type="button", onclick="loginChecker()")
-							h1 Post
-		script
-			$("#myTab a[href='/search']").addClass("active");
-			//(href="/wall")
+		div.span9
+			ul.nav-tabs.nav(id="myTab")
+				li
+					a(href="/profil/#{item.name}/wall") Wall
+				li.active
+					a(href="/profil/#{item.name}/search") Search
+				li
+					a(href="/profil/#{item.name}/profiles") Profiles
+			div.wPost
+				form.form-search(method="post", action="searchIT")
+					div.input-append
+						input.span2.search-query(type="text", name="searchit", placeholder="Search...")
+						button.btn.btn-primary(type="submit") Search
 			
-			in funktion schreiben // body onload
+			- if(fProf != 0 || fPosts != 0)
+				div.tabbable.tabs-left
+					ul.nav.nav-tabs
+						li.active
+							a(href="#tab1", data-toggle="tab") Profiles
+						li
+							a(href="#tab2", data-toggle="tab") Posts
+					div.tab-content
+						#tab1.tab-pane.active
+							- for(var i = 0; i < fProf.length; i++)
+								div.wPost
+									p blaaa
+								
+						#tab2.tab-pane
+							p hi lala
+					

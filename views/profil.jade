@@ -3,7 +3,7 @@ block content
 		div.row
 			div.span3
 				- if(item.picture)
-					img.img-polaroid(src="/pictures/#{item.picture}", height="250", width="200")
+					img.img-polaroid(src="/pictures/p_#{item.name}.jpg", height="250", width="200")
 				- else
 					img.img-polaroid(src="http://placehold.it/200x250")
 				hr
@@ -21,14 +21,9 @@ block content
 						tr
 							td Age
 							td 23
-			div.span9
-				ul.nav-tabs.nav(id="myTab")
-					li.active
-						a(href="/profil/#{username}/wall") Wall
-					li
-						a(href="/profil/#{username}/search") Search
-					li
-						a(href="/profil/#{username}/profiles") Profiles				
-				
-				#Content
-					block wall
+				- if(username == item.name)
+					form.form-inline(method="post", action="delete/profil/#{item._id}")
+						button.btn.btn-primary(type="submit")
+							b Delete Profil
+			#Content
+				block wall
