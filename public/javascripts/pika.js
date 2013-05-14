@@ -18,6 +18,10 @@ function BootAnim(){
 			})
 }
 
+function Edit(){
+	$('#editModal').modal()
+}
+
 
 //////////////
 //Ajax Calls//
@@ -25,6 +29,12 @@ function BootAnim(){
 
 ////POST
 //Login
+
+function ajxUpdate(field){
+	
+}
+
+
 function ajxLog(){
 	var user = document.getElementById("logName").value;
 	var pass = document.getElementById("logPass").value;

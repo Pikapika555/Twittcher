@@ -13,24 +13,24 @@ block content
 
 			#myModal.modal.hide.fade(tabindex="-1", role="dialog", aria-labelledby="myModalLabel", aria-hidden="true")
 				div.modal-header
-					button.close(type="button", data-dismiss="modal", aria-hidden="true")
+					button.close(type="button", data-dismiss="modal", aria-hidden="true") &times;
 					h3(id="myModalLabel") Registration
 				div.modal-body
 					form.form-horizontal(method="post", enctype="multipart/form-data", action="regIT")
 						div.control-group
-							label.control-label(for="inputPassword") Email:
+							label.control-label(for="R_email") Email:
 							input.input-small(id="logPass", type="text", name="R_email", placeholder="Email")
 						div.control-group
-							label.control-label(for="inputPassword") Username:
+							label.control-label(for="R_username") Username:
 							input.input-small(id="logName", type="text", name="R_username", placeholder="Username")
 						div.control-group
-							label.control-label(for="inputPassword") Password:
+							label.control-label(for="R_password") Password:
 							input.input-small(id="logPass", type="password", name="R_password", placeholder="Password")
 						div.control-group
-							label.control-label(for="inputPassword") Repeat Password:
+							label.control-label(for="R_password2") Repeat Password:
 							input.input-small(id="logPass", type="password", name="R_password2", placeholder="Password")
 						div.control-group
-							label.control-label(for="") Upload Image
+							label.control-label(for="R_picture") Upload Image
 							input(type="file", name="R_picture")
 						div.control-group
 							button.btn.btn-primary(type="post")

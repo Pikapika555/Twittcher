@@ -88,7 +88,6 @@ exports.Register = function(req, res, data){
 				if (err) throw err;
 				fs.unlink(tmp_path, function() {
 					if (err) throw err;
-					///////////BILD UMBENENNEN IN USERNAME
 				});
 			});
 			var profil = {name: req.body.R_username
@@ -138,14 +137,38 @@ exports.Delete = function(req, res){
 	var type = req.params.itemType;
 	switch(type){
 		case "post":
-			console.log("post: "+type)
-			console.log(req.params.id);
 			DeletePost(req, res);
+			break;
 		case "profil":
 			console.log("profil: "+type)
 			console.log("deleting Profil: "+req.params.id)
 			DeleteProfil(req, res);
+			break;
 	}
+}
+
+exports.Update = function(req, res){
+	if(req.files.R_picture.type == "image/jpeg"){
+		var tmp_path = req.files.R_picture.path;
+		var target_path = './public/pictures/p_' + req.session.username + '.jpg'; //   req.files.R_picture.name;
+		fs.rename(tmp_path, target_path, function(err) {
+			if (err) throw err;
+			fs.unlink(tmp_path, function() {
+				if (err) throw err;
+				else{
+					console.log("else "+target_path);
+					UpdateData(req, res);
+				}
+			});
+		});
+		
+	}
+	else{
+		console.log("else");
+		UpdateData(req, res);
+	}
+	
+	
 }
 
 exports.logout = function(req, res){
@@ -271,18 +294,18 @@ function CreateProfiles(req, res, item, callback){
 }
 
 function CreateSearch(req, res){ //aufrufbar durch post und get
-	var searVal = req.body.searchit;
 	//console.log(searVal);
 	CreateProfil(req, res, function(req, res, item){
+		var searVal = req.body.searchit;
 		if(searVal){
-			console.log(searVal);
 			db.collection("profiles", function(err, collection) {
-				collection.find({"name": searVar}).toArray(function(err, searProf) {
-					if(!searProf){ searProf = 0; }
-					console.log("a");
+				collection.find({"name": new RegExp(req.body.searchit, "i")}).toArray(function(err, searProf) {
+					console.log(searProf[0])
+					console.log(req.body.searchit);
 					db.collection("postings", function(err, collection) {
-						collection.find().toArray(function(err, searPosts) {
+						collection.find({"message": new RegExp(req.body.searchit, "i")}).toArray(function(err, searPosts) {
 							if(!searPosts){ searPosts = 0; }
+							console.log(searProf)
 							RSearch(req, res, item, searProf, searPosts);
 						});
 					});
@@ -304,10 +327,33 @@ function DeletePost(req, res){
 						console.log("Post Removed");
 						res.redirect('/profil/'+req.params.currentProfil+'/wall');
 					}
-				}); 
+				});
 			}
 		});
 	});
+}
+
+function UpdateData(req, res){
+	var name = req.session.username;
+	var profil = req.body;
+	for (var i in profil) {
+		if (!profil[i]) {
+			console.log(profil[i]);
+			delete profil[i];
+		}
+		else{
+		console.log("a");
+		}
+	}
+	console.log(profil);
+	
+	if(name == req.params.urlName){
+		db.collection('profiles', function(err, collection){
+			collection.update({'name': name },{$set:  profil} , {safe:true}, function(err, result){
+				res.redirect("/profil/"+name);
+			});
+		});
+	}
 }
 
 function DeleteProfil(req, res){

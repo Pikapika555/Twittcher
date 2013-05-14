@@ -24,11 +24,13 @@ block header
 							- else
 								form.form-horizontal(method="post", action="logout")
 									p Hello #{username}
-									a.btn.btn-primary(href="/profil/#{username}")
-										i.icon-home.icon-white
-										b  Profil
-									button.btn.btn-primary(type="submit")
-										b Logout
+									div.btn-group
+										a.btn.btn-primary(href="/profil/#{username}")
+											i.icon-home.icon-white
+											b  Profil
+										button.btn.btn-primary(type="submit")
+											b Logout 
+											i.icon-off.icon-white
 
 											
 								

@@ -3,15 +3,18 @@ block content
 		div.row
 			div.span3
 				- if(item.picture)
-					img.img-polaroid(src="/pictures/p_#{item.name}.jpg", height="250", width="200")
+					a(href="#photoModal", data-toggle="modal")
+						img.img-polaroid(src="/pictures/p_#{item.name}.jpg", height="250", width="200")
 				- else
 					img.img-polaroid(src="http://placehold.it/200x250")
 				hr
 				table.table.table-striped
-					tbody	
+					tbody
 						tr
 							td Nickname:
 							td #{item.name}
+								
+							
 						tr
 							td Email:
 							td #{item.email}
@@ -21,9 +24,48 @@ block content
 						tr
 							td Age
 							td 23
+								
 				- if(username == item.name)
-					form.form-inline(method="post", action="delete/profil/#{item._id}")
-						button.btn.btn-primary(type="submit")
-							b Delete Profil
+					form(method="post", action="delete/profil/#{item._id}")
+						div.btn-group
+							a.btn.btn-primary(role="button", href="#editModal", data-toggle="modal")
+								b Edit Profil
+							button.btn.btn-primary(type="submit")
+								b Delete Profil 
+								i.icon-trash.icon-white
+							
+								
+						
 			#Content
 				block wall
+				
+			#photoModal.modal.hide.fade(tabindex="-1", role="dialog", aria-labelledby="myModalLabel", aria-hidden="true")
+				div.modal-body
+					img(src="/pictures/p_#{item.name}.jpg")
+			
+			#editModal.modal.hide.fade(tabindex="-1", role="dialog", aria-labelledby="myModalLabel", aria-hidden="true")
+				div.modal-header
+					button.close(type="button", data-dismiss="modal", aria-hidden="true") &times;
+					h3(id="myModalLabel") Edit Profil
+				div.modal-body
+					form.form-horizontal(method="post", enctype="multipart/form-data", action="Update")
+						div.control-group
+							label.control-label(for="R_email") Email: 
+							input.input-small(id="logPass", type="text", name="email", placeholder="change Email")
+						div.control-group
+							label.control-label(for="R_password") Password:
+							input.input-small(id="logName", type="text", name="pass", placeholder="change Password")
+						div.control-group
+							label.control-label(for="R_age") Age:
+							input.input-small(id="logName", type="text", name="age", placeholder="change Age")
+						div.control-group
+							label.control-label(for="R_gender") Gender:
+							input.input-small(id="logName", type="text", name="gender", placeholder="change Gender")
+						div.control-group
+							label.control-label(for="R_picture") Upload Image
+							input(type="file", name="R_picture")
+						div.control-group
+							button.btn.btn-primary(type="post")
+								b Update Data
+				div.modal-footer
+						button.btn(data-dismiss="modal", aria-hidden="true") Close

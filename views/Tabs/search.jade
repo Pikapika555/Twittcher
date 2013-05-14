@@ -11,7 +11,7 @@ block wall
 			div.wPost
 				form.form-search(method="post", action="searchIT")
 					div.input-append
-						input.span2.search-query(type="text", name="searchit", placeholder="Search...")
+						input.span4.search-query(type="text", name="searchit", placeholder="Search...")
 						button.btn.btn-primary(type="submit") Search
 			
 			- if(fProf != 0 || fPosts != 0)
@@ -23,10 +23,23 @@ block wall
 							a(href="#tab2", data-toggle="tab") Posts
 					div.tab-content
 						#tab1.tab-pane.active
-							- for(var i = 0; i < fProf.length; i++)
-								div.wPost
-									p blaaa
+							ul.thumbnails
+								- for(var i = 0; i < fProf.length; i++)
+										li.span2
+											div.thumbnail
+												a(href="/profil/#{fProf[i].name}")
+													img(src="/pictures/p_#{fProf[i].name}.jpg")
+													h4 #{fProf[i].name}
 								
 						#tab2.tab-pane
-							p hi lala
+							- for(var i = 0; i < fPosts.length; i++)
+								div.wPost
+									div.media
+											a.pull-left(href="/profil/#{fPosts[i].reciepient}")
+												img.media-object(src="/pictures/p_#{fPosts[i].author}.jpg", width="100")
+											div.media-body
+												h4 #{fPosts[i].author}  
+													small   to #{fPosts[i].reciepient}
+												p #{fPosts[i].message}
+												
 					
