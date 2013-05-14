@@ -1,6 +1,6 @@
 extends ../profil
 block wall
-		div.span9
+		div.span8
 			ul.nav-tabs.nav(id="myTab")
 				li.active
 					a(href="/profil/#{item.name}/wall") Wall
@@ -12,11 +12,11 @@ block wall
 			div.wPost
 				div.row
 					div.span2
-							img.img-polaroid(src="/pictures/p_#{item.name}.jpg")
-					div.span6
+							img.img-polaroid(src="/pictures/p_#{item.name}.jpg", width="100")
+					div.span5
 						form.form-inline(method="post", action="postWall")
-							textarea.span6(rows="4", name="postbox")
-							button.span6.btn.btn-primary.btnX.left(type="submit")
+							textarea.span5(rows="4", name="postbox")
+							button.span5.btn.btn-primary.btnX.left(type="submit")
 								b Post it !
 
 			
@@ -26,7 +26,7 @@ block wall
 						div.span2
 							a(href="/profil/#{posts[i].author}")
 								img.img-polaroid.wIMargin(src="/pictures/p_#{posts[i].author}.jpg", width="100")
-						div.span6
+						div.span5
 							div.row
 								form.form-inline(method="post", action="delete/post/#{posts[i]._id}")
 									- if(posts[i].author == username || posts[i].reciepient == username)

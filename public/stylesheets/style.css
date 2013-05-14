@@ -38,6 +38,12 @@ textarea {
   border-top-right-radius: 0px;
   border-bottom-right-radius: 5px;
 }
+.modal-body {
+  max-height: 800px;
+}
+p.white {
+  color: #ccc;
+}
 .red {
   color: #f00;
 }

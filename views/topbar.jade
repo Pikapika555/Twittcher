@@ -4,13 +4,14 @@ block header
 			div.navbar-inner
 				div.container
 					div.row
-							#twitt.span7
+							#twitt.span8
 								a(href="/")
 									img(src="/images/Twittcher.jpg")
 							div.loginBar.span1
 								loggedvariable = 0
 							- if(!username)
 								#loginForm
+										p.white Please Login here
 										form.form-inline(method="post")
 												input.input-small(id="logName", type="text", name="username", placeholder="Username")
 												| 
@@ -23,7 +24,7 @@ block header
 												span.red #{logError}
 							- else
 								form.form-horizontal(method="post", action="logout")
-									p Hello #{username}
+									p.white Logged as #{username}
 									div.btn-group
 										a.btn.btn-primary(href="/profil/#{username}")
 											i.icon-home.icon-white

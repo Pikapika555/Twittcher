@@ -20,10 +20,10 @@ block content
 							td #{item.email}
 						tr
 							td Sex:
-							td Male
+							td #{item.gender}
 						tr
 							td Age
-							td 23
+							td #{item.age}
 								
 				- if(username == item.name)
 					form(method="post", action="delete/profil/#{item._id}")
