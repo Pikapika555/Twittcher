@@ -1,6 +1,6 @@
 {
   "name": "application-name",
-  "version": "0.0.1",
+  "version": "0.0.1-1",
   "private": true,
   "scripts": {
     "start": "node app.js"
@@ -9,11 +9,12 @@
     "express": "3.2.0",
     "jade": "*",
     "stylus": "*",
-	"mongodb": "*",
-	"socket.io": "0.9.10"
+    "mongodb": "*",
+    "socket.io": "0.9.10"
   },
-   "engines": {
+  "engines": {
     "node": "0.10.x",
     "npm": "1.2.x"
-  }
+  },
+  "subdomain": "Pikapika555-Twittcher"
 }
