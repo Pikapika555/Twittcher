@@ -13,7 +13,10 @@ var Server = mongo.Server,
     assert = require('assert');
 
 var server = new Server('localhost', 27017, {auto_reconnect: true});
+//var server = new Server('alex.mongohq.com', 10060, {user: 'nodejitsu', pass: 'af44fa0312328fc68782796bcacab0c1'}, {auto_reconnect: true});
+//var server = new Server('alex.mongohq.com', 10060, {auto_reconnect: true});
 db = new Db('twittDB', server);
+//db.authenticate({dbUser: "nodejitsu"}, {dbPass: "af44fa0312328fc68782796bcacab0c1"}, {authdb: "admin"});
 
 db.open(function(err,db){
 	if(!err) {
@@ -26,7 +29,6 @@ db.open(function(err,db){
 		});
 	}
 });
-
 exports.findById = function(req, res) {
 	var id = req.params.id;
 	console.log('Retrieving profil: ' + id);
